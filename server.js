@@ -90,7 +90,7 @@ const students = [
     })    */ 
 
 //create a new student
- Student.create(
+/*  Student.create(
     {
         name: "Tina Jones",
         email: "xtr6v@example.com",
@@ -109,7 +109,166 @@ const students = [
     })
     .catch((error) => {
         console.error(error);
+    }) */
+
+//read all operation
+
+/* Student.find()  
+    .then((result) => {
+        console.log(result.length);
     })
+    .catch((error) => {
+        console.error(error);
+    }) */
+
+//read one operation
+   /* Student.findById("67756fed9ff4f1858c3e8cbc")
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */  
+/* 
+Student.findOne({name: "Kassim Paid"})
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    })   */
+
+//Query operations
+// .where() .limit() .skip() .sort()
+
+/*  Student.find()
+    .where("gender", "male")
+    .limit(3)   
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
+  
+/* Student.find()
+    .where("age").gt(30)
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
+
+/* Student.find()
+    .where("age").lt(30)
+    .sort({name: -1})
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
+ 
+
+//update operation
+
+/*  Student.updateOne(
+    {_id: "67756fed9ff4f1858c3e8cbc"},
+    {
+        $set: {
+            name: "Kassim Wajid",       
+        }
+    }
+)
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    })  */
+
+/* Student.findByIdAndUpdate(
+        "67756fed9ff4f1858c3e8cbc",
+        {
+            $set: {
+                name: "Kassim Wajid",
+                age: 36       
+            }
+        },
+        {
+            new: true
+        }
+    )
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
+
+
+//delete operation
+
+ /*  Student.findByIdAndDelete("67756fed9ff4f1858c3e8cbc")
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    })  */
+
+/* Student.deleteMany(
+    {
+        gender: "male"
+    }
+)
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
+
+
+//increment and decrement operations
+
+ /*  Student.findById("67756ee190162181b1dae95e")
+    .then((result) => {
+        result.age++;
+        result.save();
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    })   */
+
+/*   Student.findById("67757587a9d4efd79a13f42e")
+    .then((result) => {
+        result.age--;
+        result.save();
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    })   */
+
+//multiply and divide operations
+
+/* Student.findOneAndUpdate(
+    {_id: "67757587a9d4efd79a13f42e"},
+    {
+        $mul: {
+            age: 2
+        }
+    }
+)
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.error(error);
+    }) */
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
