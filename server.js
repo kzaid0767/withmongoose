@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import validator from "validator";
 
 const app = express();
 const port = 8082 || process.env.PORT;
@@ -37,6 +38,14 @@ const studentSchema = new mongoose.Schema({
         unique: true,
         validate: [validateEmail, "Please enter a valid email"]
     },
+    isActive: {
+        type: String,
+        required: true,
+        validate: {
+            validator: (value) => validator.isBoolean(value),
+            message: "Please enter a boolean value"
+        }
+    },
     age: {
         type: Number,
         required: [true, "Please enter an age"],
@@ -63,6 +72,7 @@ const newStudent = new Student({
     name: "Kassim Paid",
     email: "x9a6v@example.com",
     age: 43,
+    isActive: 'true',
     gender: "male",
     objectId: new mongoose.Types.ObjectId(),
     address: {
@@ -129,13 +139,14 @@ const students = [
 //create a new student
   Student.create(
     {
-        name: "Tia Jones",
-        email: "xtr6vex@ample.com",
-        age: 43,
+        name: "Aria Owenes",
+        email: "sxtrbgex@ample.com",
+        age: 23,
         gender: "female",
+        isActive: false,
         objectId: new mongoose.Types.ObjectId(),
         address: {
-            street: "123 Street Twain Lane",
+            street: "123 Street Twain St",
             city: "Tew KSC",
             zipCode: 18301
         } 
