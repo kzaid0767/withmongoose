@@ -17,6 +17,12 @@ const connectDB = async () => {
 
 connectDB();
 
+// custom validation function
+function validateEmail(email) {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+}
+
 //designing the schema with validation
 const studentSchema = new mongoose.Schema({
     name: {
@@ -29,10 +35,7 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter an email"],
         unique: true,
-        match: [
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            "Please add a valid email"
-        ]
+        validate: [validateEmail, "Please enter a valid email"]
     },
     age: {
         type: Number,
@@ -124,17 +127,17 @@ const students = [
     })     */
 
 //create a new student
-/*  Student.create(
+  Student.create(
     {
-        name: "Tina Jones",
-        email: "xtr6v@example.com",
+        name: "Tia Jones",
+        email: "xtr6vex@ample.com",
         age: 43,
         gender: "female",
         objectId: new mongoose.Types.ObjectId(),
         address: {
-            street: "123 Twain Lane",
+            street: "123 Street Twain Lane",
             city: "Tew KSC",
-            zipCode: 10301
+            zipCode: 18301
         } 
     }
  )
@@ -143,7 +146,7 @@ const students = [
     })
     .catch((error) => {
         console.error(error);
-    }) */
+    }) 
 
 //read all operation
 
