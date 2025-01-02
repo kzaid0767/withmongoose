@@ -17,12 +17,34 @@ const connectDB = async () => {
 
 connectDB();
 
-//designing the schema
+//designing the schema with validation
 const studentSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    age: Number,
-    gender: String,
+    name: {
+        type: String,
+        required: [true, "Please enter a name"],
+        minLength: [2, "Name must be at least 2 characters"],
+        maxLength: [50, "Name must be less than 50 characters"]
+    },
+    email: {
+        type: String,
+        required: [true, "Please enter an email"],
+        unique: true,
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            "Please add a valid email"
+        ]
+    },
+    age: {
+        type: Number,
+        required: [true, "Please enter an age"],
+        min: [18, "Age must be at least 18"],
+        max: [100, "Age must be less than 100"]
+    },
+    gender: {
+        type: String,
+        required: [true, "Please enter a gender"],
+        enum: ["male", "female"]
+    },
     objectId: mongoose.Schema.Types.ObjectId,
     address: {
         street: String,
@@ -71,7 +93,7 @@ const students = [
     {
         name: "Juan de la Cruz",
         email: "z9a6v@example.com", 
-        age: 13,
+        age: 23,
         gender: "male",
         objectId: new mongoose.Types.ObjectId(),
         address: {
@@ -79,15 +101,27 @@ const students = [
             city: "New BKC",
             zipCode: 10301    
         }
+    },
+    {
+        name: "Tina Jones",
+        email: "xtr6v@example.com", 
+        age: 53,
+        gender: "female",
+        objectId: new mongoose.Types.ObjectId(),
+        address: {
+            street: "123 Twain Lane",
+            city: "Tew KSC",
+            zipCode: 10301    
+        }
     }]
 
-/*  Student.insertMany(students)
+ /*  Student.insertMany(students)
     .then((result) => {
         console.log(result);
     })
     .catch((error) => {
         console.error(error);
-    })    */ 
+    })     */
 
 //create a new student
 /*  Student.create(
