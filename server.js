@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { set } from "mongoose";
 import validator from "validator";
 
 const app = express();
@@ -25,13 +25,16 @@ function validateEmail(email) {
 }
 
 //designing the schema with validation
+// adding setters and getters
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please enter a name"],
         minLength: [2, "Name must be at least 2 characters"],
-        maxLength: [50, "Name must be less than 50 characters"]
-    },
+        maxLength: [50, "Name must be less than 50 characters"],
+        set: (value) => value.trim().toLowerCase(),
+        get: (value) => value.toUpperCase(),         
+        },
     email: {
         type: String,
         required: [true, "Please enter an email"],
@@ -50,7 +53,8 @@ const studentSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please enter an age"],
         min: [18, "Age must be at least 18"],
-        max: [100, "Age must be less than 100"]
+        max: [100, "Age must be less than 100"],
+        get: (value) => value * 2
     },
     gender: {
         type: String,
@@ -137,13 +141,13 @@ const students = [
     })     */
 
 //create a new student
-  Student.create(
+/*   Student.create(
     {
-        name: "Aria Owenes",
-        email: "sxtrbgex@ample.com",
-        age: 23,
+        name: "MARIA GARCIA",
+        email: "mariex@ample.com",
+        age: 27,
         gender: "female",
-        isActive: false,
+        isActive: true,
         objectId: new mongoose.Types.ObjectId(),
         address: {
             street: "123 Street Twain St",
@@ -157,7 +161,7 @@ const students = [
     })
     .catch((error) => {
         console.error(error);
-    }) 
+    })  */
 
 //read all operation
 
@@ -170,13 +174,13 @@ const students = [
     }) */
 
 //read one operation
-   /* Student.findById("67756fed9ff4f1858c3e8cbc")
+   Student.findById("67769ae4216c8352a92538de")
     .then((result) => {
         console.log(result);
     })
     .catch((error) => {
         console.error(error);
-    }) */  
+    })   
 /* 
 Student.findOne({name: "Kassim Paid"})
     .then((result) => {
